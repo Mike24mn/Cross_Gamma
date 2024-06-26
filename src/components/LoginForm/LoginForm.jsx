@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import {useSelector} from 'react-redux';
+import axios from 'axios';
+import './LoginForm.css';
 
 function LoginForm() {
   const [username, setUsername] = useState('');
@@ -24,42 +26,51 @@ function LoginForm() {
     }
   }; // end login
 
+  const handleAuthenticate = async () => {
+    try {
+      // Send a request to your backend /auth endpoint
+      const response = await axios.get('/auth');
+      // On success, redirect or handle the response as needed
+      window.location.href = response.data.authUrl; // Redirect to Schwab authentication page
+    } catch (error) {
+      console.error('Error initiating authentication:', error);
+    }
+  }
+
   return (
+    <div>
+    <h1 className="welcomeclass">Welcome to Cross-Gamma,<br /> Analysis awaits you...</h1>
     <form className="formPanel" onSubmit={login}>
-      <h2>Login</h2>
+      <h2>Login:</h2>
       {errors.loginMessage && (
         <h3 className="alert" role="alert">
           {errors.loginMessage}
         </h3>
-      )}
+      )}  
       <div>
         <label htmlFor="username">
           Username:
-          <input
-            type="text"
-            name="username"
-            required
+          <input className="inputbackground" type ="text" name="username" placeholder='Username' required
             value={username}
-            onChange={(event) => setUsername(event.target.value)}
-          />
+            onChange={(event) => setUsername(event.target.value)}>
+          </input>
         </label>
       </div>
       <div>
         <label htmlFor="password">
           Password:
-          <input
-            type="password"
-            name="password"
-            required
+          <input className="inputbackground" type ="password" name="password" placeholder='Password' required
             value={password}
             onChange={(event) => setPassword(event.target.value)}
-          />
+          ></input>
         </label>
       </div>
       <div>
         <input className="btn" type="submit" name="submit" value="Log In" />
+        <button className="btn" onClick={handleAuthenticate}>Authenticate via Schwab</button>
       </div>
     </form>
+    </div>
   );
 }
 

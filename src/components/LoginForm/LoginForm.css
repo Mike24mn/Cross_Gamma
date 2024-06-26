@@ -1,0 +1,30 @@
+.welcomeclass {
+    opacity: 0.9;
+    text-align: center;
+    font-size: 3ch;
+    color: rgb(255, 255, 255);
+    background-color: rgb(0, 0, 0);
+    font-family: monospace;
+    font-weight: bolder;
+  }
+
+  h2 {
+    
+    color: rgb(255, 255, 255);
+    font-family: monospace;
+    background-position: center;
+    text-align-last: center;
+    text-decoration: underline;
+    font-size: 3ch
+  }
+
+  .formpanel {
+        font-family: monospace;
+    color: aliceblue;
+    font-family: monospace;
+    background-position: center;
+  }
+
+body {
+    background-color: rgb(90, 88, 88);
+}

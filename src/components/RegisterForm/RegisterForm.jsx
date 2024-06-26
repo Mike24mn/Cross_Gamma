@@ -20,8 +20,10 @@ function RegisterForm() {
   }; // end registerUser
 
   return (
+    <div>
+    <h1 className="welcomeclass">Welcome to Cross-Gamma,<br /> Analysis awaits you...</h1>
     <form className="formPanel" onSubmit={registerUser}>
-      <h2>Register User</h2>
+      <h2>Register New User:</h2>
       {errors.registrationMessage && (
         <h3 className="alert" role="alert">
           {errors.registrationMessage}
@@ -33,6 +35,7 @@ function RegisterForm() {
           <input
             type="text"
             name="username"
+            placeholder='Username'
             value={username}
             required
             onChange={(event) => setUsername(event.target.value)}
@@ -45,6 +48,7 @@ function RegisterForm() {
           <input
             type="password"
             name="password"
+            placeholder='Password'
             value={password}
             required
             onChange={(event) => setPassword(event.target.value)}
@@ -55,6 +59,7 @@ function RegisterForm() {
         <input className="btn" type="submit" name="submit" value="Register" />
       </div>
     </form>
+    </div>
   );
 }
 
