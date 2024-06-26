@@ -28,3 +28,16 @@
 body {
     background-color: rgb(90, 88, 88);
 }
+.btn {
+    padding: 10px 20px;
+    border: 1px solid #333;
+    border-radius: 4px;
+    background-color: #555; 
+    color: #f8f8f8; 
+    font-size: 1rem;
+    cursor: pointer;
+  }
+  
+  .btn:hover {
+    background-color: #777; 
+  }

@@ -2,8 +2,8 @@ html,
 body,
 #react-root {
   height: 100%;
-  background-color: #1e1e1e; /* Dark background color */
-  color: #f8f8f8; /* Light text color */
+  background-color: #1e1e1e; 
+  color: #f8f8f8; 
 }
 
 body {
@@ -22,15 +22,12 @@ img {
 
 .btn {
   display: inline-block;
-  padding: 10px 20px;
-  border-color: #014041;
-  border-width: 1px 1px 3px;
   border-radius: 4px;
-  background-color: #00acb0;
+  background-color: #414545;
   color: #f8f8f8;
-  font-size: 1.1rem;
   outline: 0;
   cursor: pointer;
+  font-weight: bolder;
 }
 
 .btn_sizeMin {
@@ -56,7 +53,7 @@ img {
 .btn_asLink {
   padding: 0;
   border-width: 0;
-  border-bottom: 1px solid #f8f8f8; /* Light border color */
+  border-bottom: 1px solid #f8f8f8; 
   border-radius: 0;
   background: none;
   font: inherit;
@@ -86,18 +83,18 @@ img {
   max-width: 100%;
   padding: 25px;
   margin: 0 auto 20px;
-  background-color: #333; /* Dark form background */
+  background-color: #333; 
   border-radius: 3px;
   box-shadow: 0 1px 2px rgb(0, 0, 0, 0.4);
-  display: flex; /* Use flexbox for layout */
-  flex-direction: column; /* Stack children vertically */
+  display: flex; 
+  flex-direction: column; 
 }
 
 .formPanel input {
   margin: 5px;
   margin-bottom: 10px;
-  padding: 10px; /* Add padding to inputs for spacing */
-  background-color: #444; /* Dark input background */
+  padding: 10px; 
+  background-color: #444; 
   border: none;
   border-radius: 3px;
   color: #f8f8f8;
@@ -112,12 +109,12 @@ img {
 }
 
 .formPanel .formGroup {
-  display: flex; /* Use flexbox for form groups */
-  align-items: center; /* Align items vertically */
+  display: flex; 
+  align-items: center; 
 }
 
 .formPanel .formGroup label {
-  width: 100px; /* Fixed width for labels */
+  width: 100px; 
   margin-right: 10px;
 }
 input {
