@@ -20,6 +20,9 @@ import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 
 import './App.css';
+import AccountOverview from '../AccountOverview/AccountOverview';
+import CurrentPositions from '../CurrentPositions/CurrentPositions';
+import NotesPage from '../NotesPage/NotesPage';
 
 function App() {
   const dispatch = useDispatch();
@@ -52,19 +55,27 @@ function App() {
             If the user is not logged in, the ProtectedRoute will show the LoginPage (component).
             Even though it seems like they are different pages, the user is always on localhost:5173/user */}
           <ProtectedRoute
-            // logged in shows UserPage else shows LoginPage
+            // logged in shows AccountOverview else shows LoginPage
             exact
-            path="/user"
+            path="/overview"
           >
-            <UserPage />
+            <AccountOverview />
           </ProtectedRoute>
 
           <ProtectedRoute
-            // logged in shows InfoPage else shows LoginPage
+            // logged in shows CurrentPositions else shows LoginPage
             exact
-            path="/info"
+            path="/currentpos"
           >
-            <InfoPage />
+            <CurrentPositions />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            // logged in shows NotesPage else shows LoginPage
+            exact
+            path="/notes"
+          >
+            <NotesPage />
           </ProtectedRoute>
 
           <Route
@@ -74,7 +85,7 @@ function App() {
             {user.id ?
               // If the user is already logged in, 
               // redirect to the /user page
-              <Redirect to="/user" />
+              <Redirect to="/overview" />
               :
               // Otherwise, show the login page
               <LoginPage />

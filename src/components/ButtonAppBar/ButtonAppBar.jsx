@@ -48,10 +48,13 @@ export default function ButtonAppBar({ user }) {
             ) : (
               <>
                 <MenuItem onClick={handleMenuClose}>
-                  <Link to="/user">Home</Link>
+                  <Link to="/overview">Account Overview</Link>
                 </MenuItem>
                 <MenuItem onClick={handleMenuClose}>
-                  <Link to="/info">Info Page</Link>
+                  <Link to="/currentpos">Current Positions</Link>
+                </MenuItem>
+                <MenuItem onClick={handleMenuClose}>
+                  <Link to="/notes">Notes</Link>
                 </MenuItem>
               </>
             )}
