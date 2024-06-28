@@ -1,15 +1,18 @@
 import axios from "axios";
 import { put, takeLatest, call } from "redux-saga/effects";
 
-function* fetchNotes() {
+
+
+const config = {
+    headers: { 'Content-Type': 'application/json' },
+    withCredentials: true,
+  };
+function* fetchNotes(action) {
   try {
     // Get the notes:
-    const response = yield axios.get("/api/notes", config);
-    // Set the value of the genres reducer:
-    yield put({
-      type: "SET_NOTES",
-      payload: response.data,
-    });
+    console.log(action.payload);
+    const response = yield call(axios.get, `/api/notes/user/${action.payload.userId}`, config);
+    yield put({ type: "SET_NOTE", payload: response.data })
   } catch (error) {
     console.log("fetchNotes error:", error);
   }
@@ -17,10 +20,10 @@ function* fetchNotes() {
 
 function* addNote(action) {
   try {
-    yield call(axios.post, "/api/notes", action.payload);
-    yield put({ type: "FETCH_NOTE" });
+    yield call(axios.post, "/api/notes", action.payload, config);
+    yield put({ type: "FETCH_NOTE", payload: {userId: action.payload.openpos_id}})
   } catch (error) {
-    console.log("Error with the shelf post request", error);
+    console.log("Error with the note post request", error);
   }
 }
 

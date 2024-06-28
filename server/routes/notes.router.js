@@ -7,9 +7,9 @@ const {
 
 /**
  * GET route template
- */
-router.get("/notes/:userId", rejectUnauthenticated, async (req, res) => {
-  const { userId } = req.params;
+ */ // Get all notes for a user
+router.get("/user/:userId", rejectUnauthenticated, async (req, res) => {
+  const { userId } = req.params
   try {
     const query = `    SELECT 
       "notes_table"."note_id", 
@@ -27,21 +27,47 @@ router.get("/notes/:userId", rejectUnauthenticated, async (req, res) => {
     JOIN 
       "user" ON  "options_positions_table"."user_id" = "user"."id"
     WHERE "user"."id" =  $1;
-    `;
-    const userVal = [userId];
-    const result = await pool.query(query, values);
-    res.send(result.rows);
+    `
+    const userVal = [userId]
+    const result = await pool.query(query, userVal)
+    res.send(result.rows)
   } catch (error) {
-    console.log("error get notes", error);
-    res.sendStatus(500);
+    console.log("error get notes", error)
+    res.sendStatus(500)
   }
 });
 
 /**
  * POST route template
- */
-router.post("/", (req, res) => {
-  // POST route code here
-});
+ */ // Add new Note 
+router.post('/', rejectUnauthenticated, async (req, res) => {
+    const { openpos_id, note } = req.body
+    try {
+      await pool.query(
+        `INSERT INTO "notes_table" ("openpos_id", "note", "note_created")
+         VALUES ($1, $2, NOW())`, // timestamp that NOW
+        [openpos_id, note]
+      );
+      res.sendStatus(201);
+    } catch (error) {
+      console.error('Error adding note:', error)
+      res.status(500).send('Error add note')
+    }
+  })
+
+  router.delete('/:noteId', rejectUnauthenticated, async (req, res) => {
+    const { noteId } = req.params
+    try {
+      await pool.query(
+        `DELETE FROM "notes_table" WHERE "note_id" = $1`,
+        [noteId]
+      );
+      res.sendStatus(200)
+    } catch (error) {
+      console.error('Error deleting note:', error)
+      res.status(500).send('Error delete note')
+    }
+  })
+  
 
 module.exports = router;

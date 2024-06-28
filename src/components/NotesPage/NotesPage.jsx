@@ -6,25 +6,28 @@ import ButtonAppBar from "../ButtonAppBar/ButtonAppBar.jsx";
 import { useEffect, useState } from 'react';
 
 
+
 function NotesPage() {
     
     const dispatch = useDispatch();
     const noteItems = useSelector((store)=>store.notesReducer)
     const [note, setNote] = useState('');
+    const userId = useSelector(state => state.user.id); 
 
   
   useEffect(()=> {
-    dispatch({type: "FETCH_NOTE"})
+    if (userId) {
+        dispatch({ type: 'FETCH_NOTE', payload: { userId } })
+    }
   }, []);
   
   
   const handleSubmit = (event) => {
-    event.preventDefault(); // Prevent default form submission behavior
+    event.preventDefault(); // Prevent default form submission 
+    
+    dispatch({ type: 'ADD_NOTE', payload: {openpos_id: userId, note } })
   
-    // Dispatch action with payload
-    dispatch({ type: 'ADD_NOTE', payload: { note } });
-  
-    // Clear input fields
+    // Clear input
     setNote('');
   }
   

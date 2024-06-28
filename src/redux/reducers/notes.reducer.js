@@ -1,9 +1,8 @@
 const notesReducer = (state = [], action) => {
   switch (action.type) {
     case "SET_NOTE":
-      return action.payload;
-    case "ADD_NOTE_SUCCESS":
-      return [...state, action.payload];
+      return action.payload || [];
+
     default:
       return state;
   }
