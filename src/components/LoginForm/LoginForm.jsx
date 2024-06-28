@@ -28,10 +28,14 @@ function LoginForm() {
 
   const handleAuthenticate = async () => {
     try {
-      // Send a request to your backend /auth endpoint
+      // request to backend /auth endpoint to get Schwab authentication URL
       const response = await axios.get('/auth');
-      // On success, redirect or handle the response as needed
-      window.location.href = response.data.authUrl; // Redirect to Schwab authentication page
+  
+      // ensure correct data structure from server
+      const authUrl = response.data.authUrl; // aadjust according to backend response
+  
+      // redirect the user to Schwab authentication page
+      window.location.href = authUrl;
     } catch (error) {
       console.error('Error initiating authentication:', error);
     }

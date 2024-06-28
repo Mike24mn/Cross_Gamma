@@ -1,5 +1,6 @@
 const base64 = require('base-64')
 const axios = require('axios')
+require('dotenv').config();
 
 const SCHWA_APP_KEY = process.env.SCHWA_APP_KEY
 const SCHWA_SECRET = process.env.SCHWA_SECRET
@@ -22,7 +23,7 @@ async function getToken(returnedLink) {
 
   try {
     const response = await axios.post('https://api.schwabapi.com/v1/oauth/token', new URLSearchParams(data), { headers: headers })
-    return response
+    return response.data
   } catch (error) {
     console.error(error)
     throw error;

@@ -2,11 +2,13 @@ const express = require('express');
 const app = express();
 require('dotenv').config();
 const PORT = process.env.PORT || 5001;
-const schwabApi = require('./api/schwabApi.js')
-const bodyParser = require('body-parser')
+const schwabApi = require('./api/schwabApi.js');
+const bodyParser = require('body-parser');
 
-
-app.use(bodyParser.json())
+app.use(bodyParser.json());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static('build'));
 
 // OAuth Routes
 
@@ -18,21 +20,25 @@ app.get('/callback', async (req, res) => {
   const returnedLink = req.query.code
   try {
     const tokenData = await schwabApi.getToken(returnedLink)
-    res.json(tokenData.data)
+    req.session.tokenData = tokenData;
+    res.json(tokenData)
   } catch (error) {
     res.status(500).send('Error retrieving thy token')
   }
 })
 
 app.get('/accountNumbers', async (req, res) => {
-  try {
-    const accountData = await schwabApi.getAccountNum()
-    res.json(accountData.data)
-  } catch (error) {
-    res.status(500).send('Error retrieving account numbs')
+  const tokenData = req.session.tokenData;
+  if (!tokenData) {
+    return res.status(401).send('Unauthorized');
   }
-})
-
+  try {
+    const accountData = await schwabApi.getAccountNum(tokenData.access_token);
+    res.json(accountData);
+  } catch (error) {
+    res.status(500).send('Error retrieving account numbers');
+  }
+});
 
 // Middleware Includes
 const sessionMiddleware = require('./modules/session-middleware');
@@ -46,6 +52,7 @@ const notesRouter = require("./routes/notes.router.js")
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(express.static('build'));
+
 
 // Passport Session Configuration
 app.use(sessionMiddleware);

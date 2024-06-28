@@ -30,6 +30,7 @@ router.get("/user/:userId", rejectUnauthenticated, async (req, res) => {
     `
     const userVal = [userId]
     const result = await pool.query(query, userVal)
+    console.log('Fetched positions with notes:', result.rows)
     res.send(result.rows)
   } catch (error) {
     console.log("error get notes", error)
@@ -68,6 +69,19 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
       res.status(500).send('Error delete note')
     }
   })
+
+  router.put("/:note_id", rejectUnauthenticated, async (req, res) => {
+    const { note_id } = req.params
+    const { note } = req.body
   
+    try {
+      const query = `UPDATE "notes_table" SET "note" = $1 WHERE "note_id" = $2`
+      await pool.query(query, [note, note_id])
+      res.sendStatus(200)
+    } catch (error) {
+      console.error("Error editing note:", error)
+      res.sendStatus(500)
+    }
+  });
 
 module.exports = router;

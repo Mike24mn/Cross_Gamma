@@ -17,3 +17,15 @@ router.post('/', (req, res) => {
 });
 
 module.exports = router;
+
+
+router.delete('/:id', (req, res) => {
+  // endpoint functionality
+});
+
+/**
+ * Update an item if it's something the logged in user added
+ */
+router.put('/:id', (req, res) => {
+  // endpoint functionality
+});
