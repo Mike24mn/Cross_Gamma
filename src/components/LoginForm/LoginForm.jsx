@@ -26,10 +26,11 @@ function LoginForm() {
     }
   } // end login
 
-  const handleAuthenticate = async () => {
+  const handleAuthenticate = async (event) => {
+    event.preventDefault()
     try {
       console.log("Button clicked, starting authentication")
-      const response = await axios.get('/auth')
+      const response = await axios.get('http://localhost:5001/auth')
       console.log('Received response from /auth ONLY RESPONSE WITHOUT .DATA:', response)
       console.log('Received response.data from /auth:', response.data)
       const authUrl = response.data.authUrl // Check the structure of response.data
@@ -73,7 +74,7 @@ function LoginForm() {
       </div>
       <div>
         <input className="btn" type="submit" name="submit" value="Log In" />
-        <button className="btn" onClick={handleAuthenticate}>Authenticate via Schwab</button>
+        <button className="btn" type="button" onClick={handleAuthenticate}>Authenticate via Schwab</button>
       </div>
     </form>
     </div>

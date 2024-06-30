@@ -6,7 +6,8 @@ const SCHWA_APP_KEY = process.env.SCHWA_APP_KEY
 const SCHWA_SECRET = process.env.SCHWA_SECRET
 const CALLBACK_URL = process.env.CALLBACK_URL
 
-const authUrl = `https://api.schwab.com/v1/oauth2/authorize?client_id=${SCHWA_APP_KEY}&redirect_uri=${CALLBACK_URL}&response_type=code`
+const authUrl = `https://api.schwab.com/v1/oauth2/authorize?client_id=${SCHWA_APP_KEY}&redirect_uri=${encodeURIComponent(CALLBACK_URL)}&response_type=code`
+
 
 async function getToken(returnedCode) {
   const headers = {
