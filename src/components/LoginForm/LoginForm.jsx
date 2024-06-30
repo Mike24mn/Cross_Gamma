@@ -5,13 +5,13 @@ import axios from 'axios';
 import './LoginForm.css';
 
 function LoginForm() {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const errors = useSelector(store => store.errors);
-  const dispatch = useDispatch();
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
+  const errors = useSelector(store => store.errors)
+  const dispatch = useDispatch()
 
   const login = (event) => {
-    event.preventDefault();
+    event.preventDefault()
 
     if (username && password) {
       dispatch({
@@ -20,24 +20,26 @@ function LoginForm() {
           username: username,
           password: password,
         },
-      });
+      })
     } else {
-      dispatch({ type: 'LOGIN_INPUT_ERROR' });
+      dispatch({ type: 'LOGIN_INPUT_ERROR' })
     }
-  }; // end login
+  } // end login
 
   const handleAuthenticate = async () => {
     try {
-      // request to backend /auth endpoint to get Schwab authentication URL
-      const response = await axios.get('/auth');
-  
-      // ensure correct data structure from server
-      const authUrl = response.data.authUrl; // aadjust according to backend response
-  
-      // redirect the user to Schwab authentication page
-      window.location.href = authUrl;
+      console.log("Button clicked, starting authentication")
+      const response = await axios.get('/auth')
+      console.log('Received response from /auth ONLY RESPONSE WITHOUT .DATA:', response)
+      console.log('Received response.data from /auth:', response.data)
+      const authUrl = response.data.authUrl // Check the structure of response.data
+      if (authUrl) {
+        window.location.href = authUrl
+      } else {
+        console.error('Authentication URL not found in response', response.data)
+      }
     } catch (error) {
-      console.error('Error initiating authentication:', error);
+      console.error('Error initiating authentication:', error)
     }
   }
 
@@ -75,7 +77,7 @@ function LoginForm() {
       </div>
     </form>
     </div>
-  );
+  )
 }
 
-export default LoginForm;
+export default LoginForm
