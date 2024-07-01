@@ -40,6 +40,7 @@ app.use(passport.session())
 // Route includes
 const userRouter = require('./routes/user.router')
 const notesRouter = require('./routes/notes.router')
+const positionsRouter = require('./routes/positions.router.js')
 
 // OAuth Routes
 app.get('/auth', (req, res) => {
@@ -82,6 +83,7 @@ app.get('/accountNumbers', async (req, res) => {
 // Application routes
 app.use('/api/user', userRouter)
 app.use('/api/notes', notesRouter)
+app.use('/api/positions', positionsRouter)
 
 // Start the server
 app.listen(PORT, () => {

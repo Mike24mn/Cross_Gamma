@@ -48,4 +48,5 @@ module.exports = expressSession({
       httpOnly: true, // prevents client-side JS from accessing cookie 
       secure: false // can only be set to true if the app uses https
     },
+    
 });

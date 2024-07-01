@@ -1,92 +1,175 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import LogOutButton from "../LogOutButton/LogOutButton";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import ButtonAppBar from "../ButtonAppBar/ButtonAppBar.jsx";
-import { useEffect, useState } from "react";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import Paper from "@mui/material/Paper";
+import Button from "@mui/material/Button";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { grey } from "@mui/material/colors";
+
+const darkTheme = createTheme({
+  palette: {
+    mode: "dark",
+    primary: {
+      main: "#64a9ad", // Turquois color
+    },
+    background: {
+      default: "#424242", // background color 
+      paper: "#616161", //  paper color 
+    },
+  },
+})
 
 function NotesPage() {
-  const dispatch = useDispatch();
-  const noteItems = useSelector((store) => store.notesReducer);
-  const [note, setNote] = useState("");
-  const userId = useSelector((state) => state.user.id);
-  const [editedNote, setEditedNote] = useState('')
+  const noteItems = useSelector((store) => store.notesReducer)
+  const [entryDate, setEntryDate] = useState("")
+  const [editedNote, setEditedNote] = useState("")
   const [editNoteId, setEditNoteId] = useState(null)
+  const userId = useSelector((state) => state.user.id)
+  const dispatch = useDispatch()
+
+  const [note, setNote] = useState("")
+  const [ticker, setTicker] = useState("")
 
   useEffect(() => {
     if (userId) {
-      dispatch({ type: "FETCH_NOTE", payload: { userId } });
+      dispatch({ type: "FETCH_NOTE", payload: { userId } })
     }
-  }, []);
+  }, [userId, dispatch])
 
   const handleSubmit = (event) => {
-    event.preventDefault(); // Prevent default form submission
+    event.preventDefault()
 
-    dispatch({ type: "ADD_NOTE", payload: { openpos_id: userId, note } });
+    // check if all fields are filled
+    if (!note || !ticker || !entryDate) {
+      alert("Please fill in all fields (note, ticker, entry date) before submitting.")
+      return
+    }
 
-    // Clear input
-    setNote("");
+    dispatch({
+      type: "ADD_NOTE",
+      payload: { openpos_id: userId, note, ticker, entry_date: entryDate }
+    })
+
+    // clear the inputs
+    setNote("")
+    setTicker("")
+    setEntryDate("")
   };
 
   const handleDelete = (noteId) => {
-    console.log("Deleting note with ID:", noteId);
+    console.log("Deleting note with ID:", noteId)
     dispatch({ type: "DELETE_NOTE_REQUEST", payload: noteId })
     dispatch({ type: "FETCH_NOTE", payload: { userId } })
-  };
+  }
 
   const handleEditSubmit = (event) => {
-    event.preventDefault();
-    dispatch({ type: "EDIT_NOTE", payload: { note_id: editNoteId, note: editedNote }}); // may be wrong
-    setEditNoteId(null) // set edit note id to null, NOTE: make sure nulls can be handled here 
-    setEditedNote('') // reset edited note value 
+    event.preventDefault()
+    dispatch({ type: "EDIT_NOTE", payload: { note_id: editNoteId, note: editedNote } })
+    setEditNoteId(null)
+    setEditedNote("")
     dispatch({ type: "FETCH_NOTE", payload: { userId } })
-  };
+  }
 
   const handleEdit = (noteId, noteContents) => {
-    setEditNoteId(noteId) // set the ID of current 
-    setEditedNote(noteContents) // sent current edited note contents
-
+    setEditNoteId(noteId)
+    setEditedNote(noteContents)
   }
 
   return (
-    <div className="container">
-      <h2>Notes:</h2>
+    <ThemeProvider theme={darkTheme}>
+      <div className="container">
+        <h2 style={{ color: "white" }}>Notes:</h2>
+  <center>
+        <form onSubmit={handleSubmit}>
+          <input
+            type="text"
+            placeholder="Ticker"
+            value={ticker}
+            onChange={(event) => setTicker(event.target.value)}
+          />
+          <input
+            type="text"
+            placeholder="Add Note"
+            value={note}
+            onChange={(event) => setNote(event.target.value)}
+          />
+          <input
+            type="text"
+            placeholder="Entry Date"
+            value={entryDate}
+            onChange={(event) => setEntryDate(event.target.value)}
+          />
+          <Button type="submit" variant="contained" color="primary">
+            Submit
+          </Button>
+        </form>
+        </center>
+        <p></p>
 
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          placeholder="Add Note"
-          value={note}
-          onChange={(event) => setNote(event.target.value)}
-        />
-
-        <button type="submit">Submit</button>
-      </form>
-      <p>All of the available notes can be seen here.</p>
-
-  
-      <ul>
-        {noteItems.map((item) => (
-          <li key={item.note_id}>
-            {item.note}
-            <button onClick={() => handleEdit(item.note_id, item.note)}>Edit</button>
-            <button onClick={() => handleDelete(item.note_id)}>Delete</button>
-            
-            {editNoteId === item.note_id && (
-              <form onSubmit={handleEditSubmit}>
-                <input 
-                  type='text'
-                  value={editedNote}
-                  onChange={(event) => setEditedNote(event.target.value)}
-                />
-                <button type='submit'>Save</button>
-                <button onClick={() => setEditNoteId(null)}>Cancel</button>
-              </form>
-            )}
-          </li>
-        ))}
-      </ul>
-    </div>
+        <TableContainer component={Paper}>
+          <Table sx={{ minWidth: 650 }} size="small" aria-label="notes table">
+            <TableHead>
+              <TableRow>
+                <TableCell>Ticker:</TableCell>
+                <TableCell>Note:</TableCell>
+                <TableCell>Entry Date:</TableCell>
+                <TableCell>Note Created:</TableCell>
+                <TableCell>Actions:</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {noteItems.map((item) => (
+                <TableRow key={item.note_id}>
+                  <TableCell>{item.ticker}</TableCell>
+                  <TableCell>{item.note}</TableCell>
+                  <TableCell>{item.entry_date.substring(0, 10)}</TableCell>
+                  <TableCell>{item.note_created.substring(0, 10)}</TableCell>
+                  <TableCell>
+                    <Button
+                      onClick={() => handleEdit(item.note_id, item.note)}
+                      variant="contained"
+                      color="primary"
+                      sx={{ bgcolor: "#64a9ad" }} // Turquoise color for Edit button
+                    >
+                      Edit
+                    </Button>
+                    <Button
+                      onClick={() => handleDelete(item.note_id)}
+                      variant="contained"
+                      color="error"
+                      disabled={editNoteId === item.note_id}
+                      sx={{ bgcolor: grey[800], "&:hover": { bgcolor: grey[900] } }} // Dark grey for Delete button
+                    >
+                      Delete
+                    </Button>
+                    {editNoteId === item.note_id && (
+                      <form onSubmit={handleEditSubmit}>
+                        <input
+                          type="text"
+                          value={editedNote}
+                          onChange={(event) => setEditedNote(event.target.value)}
+                        />
+                        <Button type="submit" variant="contained" color="primary">
+                          Save
+                        </Button>
+                        <Button onClick={() => setEditNoteId(null)} variant="contained" sx={{ bgcolor: grey[800] }}>
+                          Cancel
+                        </Button>
+                      </form>
+                    )}
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </div>
+    </ThemeProvider>
   );
 }
 

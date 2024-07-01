@@ -9,10 +9,10 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { Link } from 'react-router-dom';
-import LogOutButton from '../LogOutButton/LogOutButton'; // Adjust the import path as necessary
+import LogOutButton from '../LogOutButton/LogOutButton'; 
 
 export default function ButtonAppBar({ user }) {
-  const [anchorEl, setAnchorEl] = useState(null);
+  const [anchorEl, setAnchorEl] = useState(null); // anchor point for our menu
 
   const handleMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);

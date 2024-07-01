@@ -33,7 +33,7 @@ function LoginForm() {
       const response = await axios.get('http://localhost:5001/auth')
       console.log('Received response from /auth ONLY RESPONSE WITHOUT .DATA:', response)
       console.log('Received response.data from /auth:', response.data)
-      const authUrl = response.data.authUrl // Check the structure of response.data
+      const authUrl = response.data.authUrl // check the structure of response.data
       if (authUrl) {
         window.location.href = authUrl
       } else {

@@ -26,7 +26,8 @@ router.get("/user/:userId", rejectUnauthenticated, async (req, res) => {
       "options_positions_table" ON "notes_table"."openpos_id" = "options_positions_table"."positions_id"
     JOIN 
       "user" ON  "options_positions_table"."user_id" = "user"."id"
-    WHERE "user"."id" =  $1;
+      WHERE "user"."id" =  $1
+        ORDER BY "options_positions_table"."ticker" ASC;
     `
     const userVal = [userId]
     const result = await pool.query(query, userVal)
@@ -44,6 +45,8 @@ router.get("/user/:userId", rejectUnauthenticated, async (req, res) => {
 router.post('/', rejectUnauthenticated, async (req, res) => {
     const { openpos_id, note } = req.body
     try {
+
+
       await pool.query(
         `INSERT INTO "notes_table" ("openpos_id", "note", "note_created")
          VALUES ($1, $2, NOW())`, // timestamp that NOW
