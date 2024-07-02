@@ -31,22 +31,25 @@ export default function ButtonAppBar({ user }) {
             edge="start"
             color="inherit"
             aria-label="menu"
-            sx={{ mr: 2 }}
+            sx={{ mr: 2, backgroundColor: "#000'" }} 
             onClick={handleMenuOpen}
           >
             <MenuIcon />
           </IconButton>
-          <Menu
+          <Menu 
             anchorEl={anchorEl}
             open={Boolean(anchorEl)}
             onClose={handleMenuClose}
           >
+             {/* if no user id, route to login */}
             {!user.id ? (
-              <MenuItem onClick={handleMenuClose}>
+              <MenuItem onClick={handleMenuClose} >
                 <Link to="/login">Login</Link>
               </MenuItem>
             ) : (
+              
               <>
+              {/* if user id, allow routes to acc overview, curr pos, and notes, also render that logout button! */}
                 <MenuItem onClick={handleMenuClose}>
                   <Link to="/overview">Account Overview</Link>
                 </MenuItem>
@@ -58,6 +61,7 @@ export default function ButtonAppBar({ user }) {
                 </MenuItem>
               </>
             )}
+             {/* if no user id allow route to about as well */}
             <MenuItem onClick={handleMenuClose}>
               <Link to="/about">About</Link>
             </MenuItem>
@@ -69,8 +73,9 @@ export default function ButtonAppBar({ user }) {
           <Button color="inherit">
                     <LogOutButton />
           </Button>
-          ) : (<span></span>)}
-        </Toolbar>
+          ) : (<span></span>)} 
+         {/* span above is for rendering nothing if user not logged in */}
+        </Toolbar >
       </AppBar>
     </Box>
   );
