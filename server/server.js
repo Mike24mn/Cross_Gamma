@@ -4,6 +4,7 @@ const session = require('express-session')
 const bodyParser = require('body-parser')
 const dotenv = require('dotenv')
 
+
 dotenv.config()
 
 const app = express()
@@ -19,7 +20,7 @@ app.use(express.static('build'))
 // CORS configuration
 app.use(cors({
   origin: 'http://localhost:5173',
-  credentials: true,
+  credentials: true, // allow browser to send identity related info
 }))
 
 // Session setup
@@ -61,15 +62,15 @@ app.get('/callback', async (req, res) => {
     req.session.tokenData = tokenData
     res.json(tokenData)
   } catch (error) {
-    console.error('Error retrieving token:', error)
-    res.status(500).send('Error retrieving token')
+    console.error('Error retrieving thy token:', error)
+    res.status(500).send('Error retrieving thy token')
   }
 })
 
 app.get('/accountNumbers', async (req, res) => {
   const tokenData = req.session.tokenData;
   if (!tokenData) {
-    return res.status(401).send('Unauthorized')
+    return res.status(401).send('Unauthorized, MEANING NO TOKEN DATA')
   }
   try {
     const accountData = await schwabApi.getAccountNum(tokenData.access_token)

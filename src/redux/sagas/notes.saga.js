@@ -10,7 +10,7 @@ const config = {
 function* fetchNotes(action) {
   try {
     // get the notes:
-    console.log(action.payload);
+    console.log("fetchNotes action.payload value is: ",action.payload);
     const response = yield call(axios.get, `/api/notes/user/${action.payload.userId}`, config)
     yield put({ type: "SET_NOTE", payload: response.data })
   } catch (error) {

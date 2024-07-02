@@ -1,47 +1,48 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import LogOutButton from "../LogOutButton/LogOutButton";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import ButtonAppBar from "../ButtonAppBar/ButtonAppBar.jsx";
 
-// Current user can either be passed as a prop or saved via state and tracked like that
-// i believe, we will mess with the desctructuring and different ways of managing this
-// soon
-
 function CurrentPositions() {
+  const userId = useSelector((state) => state.user.id);
+  const positionsAndStuff = useSelector((store) => store.positionsReducer);
 
-  const userId = useSelector((state) => state.user.id)
-  const positionsAndStuff = useSelector((store) => store.positionsReducer)
-
-  const dispatch = useDispatch()
-
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (userId) {
-      dispatch({ type: "FETCH_POSITIONS", payload: { userId } }) // Fetch positions for the current logged in user
+      console.log();
+      dispatch({ type: "FETCH_POSITIONS", payload: { userId } }); // Fetch positions for the current logged in user
     }
-  }, [userId, dispatch])
+  }, [userId, dispatch]);
 
-  // WE WILL NEED TONS OF MATH LOGICS AND MANIPULATIONS TO 
+  // WILL NEED  MATH/LOGIC TO
   // GET THE INFORMATION WE WANT ON THE DOM, THIS WILL
   // BE A COMBINATION OF BASIC MATH PERFORMED ON VALUES
-  // SAVED ON THE DATABASE AND ONES PULLED FROM THE API
-  // IT SHOULD BE NOTED (FOR SELF) THAT IF THE OAuth
+  // SAVED ON THE DATABASE AND ONES PULLED FROM THE API,
+  // IT SHOULD BE NOTED THAT IF THE OAuth
   // PROCESS DOES NOT GO AS ANTICIPATED, YOU COULD
   // HARDCODE SOME OF THIS AND STILL GET YOUR
-  // POINT ACROSS WITH WHAT THE APP WILL ACTUALLY DO
-
-  
-
+  // POINT ACROSS WITH WHAT THE APP IS INTENDED FOR
 
   return (
     <div>
-      <p>here is some text for our Current Positions page</p>
-      <h1>
-        We will eventually use this page as an options table page that analyzes open
-        position of a LOGGED IN user
-      </h1>
-    </div>
+    <p>Here is some text for our Current Positions page</p>
+    <h1>
+      We will eventually use this page as an options table page that analyzes
+      open positions of a LOGGED IN user
+    </h1>
+    <ul>
+      {positionsAndStuff.map((position) => (
+        <li key={position.id}>
+          <p>Ticker: {position.ticker}</p>
+          <p>Contracts: {position.contracts}</p>
+          <p>Strike: {position.strike}</p>
+        </li>
+      ))}
+    </ul>
+  </div>
   );
 }
 
