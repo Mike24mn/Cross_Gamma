@@ -7,6 +7,8 @@ import {Table,TableBody,TableCell,TableContainer,TableHead,TableRow,Paper, Butto
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { grey } from "@mui/material/colors";
 
+import BasicModal from "../ModalComponent/ModalComponent.jsx"; // import modal
+
 const darkTheme = createTheme({
   palette: {
     mode: "dark",
@@ -75,13 +77,13 @@ function CurrentPositions() {
                   <TableCell>{position.expiry.substring(0, 10)}</TableCell>
                   <TableCell>{position.dte}</TableCell>
                   <TableCell>
-                    <Button
-                      onClick={() => handleAddNote(position.id)}
+                    <BasicModal
+                   
                       variant="contained"
                       color="primary"
                      
                     >Add Note
-                    </Button>
+                    </BasicModal>
                   </TableCell>
                 </TableRow>
               ))}

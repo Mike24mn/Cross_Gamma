@@ -10,10 +10,12 @@ const authUrl = `https://api.schwabapi.com/v1/oauth/authorize?client_id=${SCHWA_
 
 
 async function getToken(returnedCode) {
+
   const headers = {
     "Authorization": `Basic ${base64.encode(`${SCHWA_APP_KEY}:${SCHWA_SECRET}`)}`,
     'Content-Type': 'application/x-www-form-urlencoded'
   }
+  console.log("headers IN GET TOKEN POST is:", headers);
 
   const data = new URLSearchParams({
     grant_type: 'authorization_code',
@@ -21,8 +23,10 @@ async function getToken(returnedCode) {
     redirect_uri: CALLBACK_URL
   }).toString()
 
+  console.log("data IN GET TOKEN POST is: ", data);
+
   try {
-    const response = await axios.post('https://api.schwab.com/v1/oauth/token', data, { headers })
+    const response = await axios.post('https://api.schwabapi.com/v1/oauth/token', data, { headers })
     return response.data
   } catch (error) {
     console.error('Error exchanging code for token:', error)
@@ -31,7 +35,7 @@ async function getToken(returnedCode) {
 }
 
 async function getAccountNum(accessToken) {
-  const baseUrl = "https://api.schwab.com/trader/v1"
+  const baseUrl = "https://api.schwab.com/trader/v1" // I think this is incorrect, look up documentation
 
   try {
     const response = await axios.get(`${baseUrl}/accounts/accountNumbers`, {
