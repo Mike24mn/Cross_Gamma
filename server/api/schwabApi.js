@@ -6,7 +6,7 @@ const SCHWA_APP_KEY = process.env.SCHWA_APP_KEY
 const SCHWA_SECRET = process.env.SCHWA_SECRET
 const CALLBACK_URL = process.env.CALLBACK_URL
 
-const authUrl = `https://api.schwab.com/v1/oauth2/authorize?client_id=${SCHWA_APP_KEY}&redirect_uri=${encodeURIComponent(CALLBACK_URL)}&response_type=code`
+const authUrl = `https://api.schwabapi.com/v1/oauth/authorize?client_id=${SCHWA_APP_KEY}&redirect_uri=${encodeURIComponent(CALLBACK_URL)}&response_type=code`
 
 
 async function getToken(returnedCode) {
@@ -19,10 +19,10 @@ async function getToken(returnedCode) {
     grant_type: 'authorization_code',
     code: returnedCode,
     redirect_uri: CALLBACK_URL
-  })
+  }).toString()
 
   try {
-    const response = await axios.post('https://api.schwab.com/v1/oauth2/token', data, { headers })
+    const response = await axios.post('https://api.schwab.com/v1/oauth/token', data, { headers })
     return response.data
   } catch (error) {
     console.error('Error exchanging code for token:', error)

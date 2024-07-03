@@ -119,7 +119,7 @@ function NotesPage() {
                 <TableCell>Note:</TableCell>
                 <TableCell>Entry Date:</TableCell>
                 <TableCell>Note Created:</TableCell>
-                <TableCell>Actions:</TableCell>
+                <TableCell>Action:</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>

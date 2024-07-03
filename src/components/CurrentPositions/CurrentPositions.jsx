@@ -79,7 +79,7 @@ function CurrentPositions() {
                       onClick={() => handleAddNote(position.id)}
                       variant="contained"
                       color="primary"
-                        {/* gotta create a handleAddnote function still! */}
+                     
                     >Add Note
                     </Button>
                   </TableCell>

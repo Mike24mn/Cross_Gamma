@@ -17,11 +17,12 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(express.static('build'))
 
-// CORS configuration
+// CORS configuration, allows sharing between trusted sites basically
 app.use(cors({
   origin: 'http://localhost:5173',
   credentials: true, // allow browser to send identity related info
 }))
+
 
 // Session setup
 app.use(session({
