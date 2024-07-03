@@ -23,6 +23,7 @@ function AccountOverview({ user }) {
       sx={{ border: '2px solid grey' }}
     >
     Net Liquidating Value:
+    <h6>$200,000</h6>
     </Box>
     </div>
 
@@ -38,6 +39,7 @@ function AccountOverview({ user }) {
       sx={{ border: '2px solid grey' }}
     >
     Premia Sold Today (insert date logic):
+    <h6>$349.50</h6>
     </Box>
     </div>
 
@@ -52,7 +54,7 @@ function AccountOverview({ user }) {
       p={2}
       sx={{ border: '2px solid grey' }}
     >
-    This will be a chart out account performance:
+    This will be a chart of user account performance:
     </Box>
     </div>
     </div>

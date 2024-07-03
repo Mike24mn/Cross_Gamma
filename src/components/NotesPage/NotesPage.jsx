@@ -40,7 +40,7 @@ function NotesPage() {
     if (userId) {
       dispatch({ type: "FETCH_NOTE", payload: { userId } })
     }
-  }, [userId, dispatch])
+  }, [userId, dispatch]) // gets notes for that specific user
 
   const handleSubmit = (event) => {
     event.preventDefault()
