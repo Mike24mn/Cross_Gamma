@@ -35,11 +35,13 @@ async function getToken(returnedCode) {
 }
 
 async function getAccountNum(accessToken) {
-  const baseUrl = "https://api.schwab.com/trader/v1" // I think this is incorrect, look up documentation
-
+  const baseUrl = "https://api.schwabapi.com/trader/v1" // NOTE: NEEDS TO BE THE URL THAT IS POSTED ON THE DEV PORTAL ROUTE YOUR TRYING TO ACCESS
+ // The response below goes to a specific API route for schwab, adjust or add more routes as needed (i.e, make more)
   try {
     const response = await axios.get(`${baseUrl}/accounts/accountNumbers`, {
-      headers: { "Authorization": `Bearer ${accessToken}` }
+      headers: { 
+        "Authorization": `Bearer ${accessToken}`,
+      }
     });
     return response.data
   } catch (error) {

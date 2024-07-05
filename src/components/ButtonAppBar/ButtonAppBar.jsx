@@ -10,8 +10,21 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { Link } from 'react-router-dom';
 import LogOutButton from '../LogOutButton/LogOutButton'; 
+import { styled } from '@mui/material/styles';  
+
+const StyledLink = styled(Link)({
+  color: 'inherit',
+  textDecoration: 'none',
+  width: '100%',
+  display: 'block',
+    fontWeight: 'bold',
+    textDecoration: 'underline',
+})
 
 export default function ButtonAppBar({ user }) {
+
+
+
   const [anchorEl, setAnchorEl] = useState(null); // anchor point for our menu
 
   const handleMenuOpen = (event) => {
@@ -40,30 +53,42 @@ export default function ButtonAppBar({ user }) {
             anchorEl={anchorEl}
             open={Boolean(anchorEl)}
             onClose={handleMenuClose}
+            sx={{
+              '& .MuiPaper-root': {
+                backgroundColor: '#666',
+              },
+              
+    '& .MuiMenuItem-root': {
+      color: '#00CED1', 
+      '&:hover': {
+        backgroundColor: '#333', 
+      },
+    },
+            }}
           >
              {/* if no user id, route to login */}
             {!user.id ? (
-              <MenuItem onClick={handleMenuClose} >
-                <Link to="/login">Login</Link>
+              <MenuItem  onClick={handleMenuClose} >
+                <StyledLink to="/login">Login</StyledLink>
               </MenuItem>
             ) : (
               
               <>
               {/* if user id, allow routes to acc overview, curr pos, and notes, also render that logout button! */}
                 <MenuItem onClick={handleMenuClose}>
-                  <Link to="/overview">Account Overview</Link>
+                  <StyledLink to="/overview">Account Overview</StyledLink>
                 </MenuItem>
                 <MenuItem onClick={handleMenuClose}>
-                  <Link to="/currentpos">Current Positions</Link>
+                  <StyledLink to="/currentpos">Current Positions</StyledLink>
                 </MenuItem>
                 <MenuItem onClick={handleMenuClose}>
-                  <Link to="/notes">Notes</Link>
+                  <StyledLink to="/notes">Notes</StyledLink>
                 </MenuItem>
               </>
             )}
              {/* if no user id allow route to about as well */}
-            <MenuItem onClick={handleMenuClose}>
-              <Link to="/about">About</Link>
+             <MenuItem onClick={handleMenuClose}>
+              <StyledLink to="/about">About</StyledLink>
             </MenuItem>
           </Menu>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>

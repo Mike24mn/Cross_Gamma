@@ -1,15 +1,28 @@
 table, th, td {
     border: 1px solid black;
   }
-
+  
   .boxes {
-    display: contents;
-    width: 540px;
-    grid-template-columns: 120px 120px 120px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     align-items: center;
-    justify-content: space-between;
+    max-width: 540px;
+    margin: auto;
+    
   }
   
-  .boxThree {
-
+  .boxOne, .boxTwo, .boxFour {
+    width: 100%
+    margin: 40px;
+    
   }
+
+  .boxThree {
+    
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  
+ 

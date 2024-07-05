@@ -27,7 +27,12 @@ export default function BasicModal() {
   const [note, setNote] = useState("");
   const [ticker, setTicker] = useState("")
   const [entryDate, setEntryDate] = useState("")
+  
   const dispatch = useDispatch()
+
+  const pickCell = (event) => {
+    const parentCol = event.target.closest
+  }
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -43,6 +48,7 @@ export default function BasicModal() {
       payload: { openpos_id: userId, note, ticker, entry_date: entryDate },
     });
     setNote("")
+    handleClose(); // close window
   };
 
   return (

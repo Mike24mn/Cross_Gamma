@@ -76,7 +76,10 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
   router.put("/:note_id", rejectUnauthenticated, async (req, res) => {
     const { note_id } = req.params
     const { note } = req.body
-  
+    
+    console.log("req.params is: ", req.params);
+    console.log("req.body is: ", req.body);
+    
     try {
       const query = `UPDATE "notes_table" SET "note" = $1 WHERE "note_id" = $2`
       await pool.query(query, [note, note_id])

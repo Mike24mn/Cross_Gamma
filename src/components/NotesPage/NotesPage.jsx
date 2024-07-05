@@ -50,11 +50,13 @@ function NotesPage() {
       alert("Please fill in all fields (note, ticker, entry date) before submitting.")
       return
     }
+    console.log("Adding Note:", { openpos_id: userId, note, ticker, entry_date: entryDate })
 
     dispatch({
       type: "ADD_NOTE",
       payload: { openpos_id: userId, note, ticker, entry_date: entryDate }
     })
+    
 
     // clear the inputs
     setNote("")
@@ -70,7 +72,7 @@ function NotesPage() {
 
   const handleEditSubmit = (event) => {
     event.preventDefault()
-    dispatch({ type: "EDIT_NOTE", payload: { note_id: editNoteId, note: editedNote } })
+    dispatch({ type: "EDIT_NOTE", payload: { note_id: editNoteId, note: editedNote, userId: userId} })
     setEditNoteId(null)
     setEditedNote("")
     dispatch({ type: "FETCH_NOTE", payload: { userId } })
@@ -84,7 +86,7 @@ function NotesPage() {
   return (
     <ThemeProvider theme={darkTheme}>
       <div className="container">
-        <h2 style={{ color: "white" }}>Notes:</h2>
+        <h2 style={{ color: "white",  }}>Notes:</h2>
   <center>
         <form onSubmit={handleSubmit}>
           <input

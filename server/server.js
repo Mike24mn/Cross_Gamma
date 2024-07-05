@@ -32,6 +32,16 @@ app.use(session({
   cookie: { secure: false }, // In production, set this to true with HTTPS
 }))
 
+// GET RID OF THIS AFTER TESTING LATER
+app.use((req, res, next) => {
+  console.log('Session Middleware Hit');
+  console.log('Session ID:', req.sessionID);
+  console.log('Session:', req.session);
+  next();
+});
+// SESSION TESING END, NO NEED FOR THIS LATER DELETE ABOVE
+
+
 // Passport and session middleware
 const sessionMiddleware = require('./modules/session-middleware')
 const passport = require('./strategies/user.strategy')
@@ -57,7 +67,10 @@ app.get('/auth', (req, res) => {
 });
 
 app.get('/callback', async (req, res) => {
-  const returnedCode = req.query.code
+  const encodedCode = req.query.code
+  const returnedCode = decodeURIComponent(encodedCode) // adjusted to decode req.query.code
+  console.log("original encoded code:", encodedCode) // delete this
+  console.log("returned code is:", returnedCode) // delete this
   try {
     const tokenData = await schwabApi.getToken(returnedCode)
     req.session.tokenData = tokenData
