@@ -22,8 +22,8 @@ function Footer() {
 
   useEffect(() => {
     const timeInt = setInterval(updateClock, 1000) // interval for clock
-    return () => clearInterval(timeInt)
-  }, [])
+    return () => clearInterval(timeInt) // clear interval when comp. unmounts
+  }, []) // run once only when mounting
 
   return (
     <footer>

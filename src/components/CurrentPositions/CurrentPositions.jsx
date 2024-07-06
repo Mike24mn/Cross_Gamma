@@ -79,7 +79,7 @@ function CurrentPositions() {
             <TableHead>
               <TableRow>
                 <TableCell>Ticker:</TableCell>
-                <TableCell>Strike (C/P):</TableCell>
+                <TableCell>Strike (C/P):</TableCell> {/* Need to add some conditional rendering to differentiate calls from puts... */}
                 <TableCell>Underlying Price:</TableCell>
                 <TableCell>Contracts:</TableCell>
 
