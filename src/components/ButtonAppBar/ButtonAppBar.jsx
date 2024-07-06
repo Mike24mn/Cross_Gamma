@@ -13,7 +13,7 @@ import LogOutButton from '../LogOutButton/LogOutButton';
 import { styled } from '@mui/material/styles';  
 
 const StyledLink = styled(Link)({
-  color: 'inherit',
+  color: '#FFFFFF',
   textDecoration: 'none',
   width: '100%',
   display: 'block',
@@ -44,7 +44,7 @@ export default function ButtonAppBar({ user }) {
             edge="start"
             color="inherit"
             aria-label="menu"
-            sx={{ mr: 2, backgroundColor: "#000'" }} 
+            sx={{ mr: 2, backgroundColor: "#507D80" }} 
             onClick={handleMenuOpen}
           >
             <MenuIcon />
@@ -55,13 +55,13 @@ export default function ButtonAppBar({ user }) {
             onClose={handleMenuClose}
             sx={{
               '& .MuiPaper-root': {
-                backgroundColor: '#666',
+                backgroundColor: '#777',
               },
               
     '& .MuiMenuItem-root': {
       color: '#00CED1', 
       '&:hover': {
-        backgroundColor: '#333', 
+        backgroundColor: '#507D80', 
       },
     },
             }}

@@ -1,87 +1,64 @@
-
 import { Link } from "react-router-dom";
 import LogOutButton from "../LogOutButton/LogOutButton";
 import { useSelector } from "react-redux";
 import ButtonAppBar from "../ButtonAppBar/ButtonAppBar.jsx";
 
-import * as React from 'react';
-import Box from '@mui/material/Box';
-import './AccountOverview.css';
+import * as React from "react";
+import Box from "@mui/material/Box";
+import "./AccountOverview.css";
 
 function AccountOverview({ user }) {
+  // hardcoded for now
+  const netLiquidatingValue = 216223.91
+  const premiaSoldToday = 349.53 // use abs value on maybe?
+  const ytdPerformancePercent = 20
+  const ytdPerformanceValue = 43212.02
+
+  // use to local string so we can get a better format for the variable numbers
+  // ... if needed, we will see
+
   return (
-    <div>
+    <div className="account-overview">
       <h2>Account Overview</h2>
-    <div className="boxes">
-      <div className="boxOne">
-        <Box
-          height={100}
-          width={150}
-          my={4}
-          display="flex"
-          flexDirection="column"
-          justifyContent="center"
-          alignItems="center"
-          gap={1}
-          p={2}
-          sx={{ border: '1px solid black', bgcolor: '#656565', color: 'white'  }}
-        >
-          <div>Net Liquidating Value:</div>
-          <div>$200,000</div>
-        </Box>
+      <div className="stats-container">
+        <div className="stat-box">
+          <div className="stat-title">Net Liquidating Value:</div>
+          <div className="stat-value">
+            ${netLiquidatingValue.toLocaleString()}
+          </div>
+        </div>
+        <div className="stat-box">
+          <div className="stat-title">Premia Sold Today:</div>
+          <div
+            className={`stat-value ${
+              premiaSoldToday >= 0 ? "positive" : "negative"
+            }`}
+          >
+            ${Math.abs(premiaSoldToday).toLocaleString()}
+          </div>
+        </div>
+        <div className="stat-box">
+          <div className="stat-title">YTD Performance:</div>
+          <div
+            className={`stat-value ${
+              ytdPerformancePercent >= 0 ? "positive" : "negative"
+            }`}
+          >
+            {ytdPerformancePercent}%
+          </div>
+          <div
+            className={`stat-value ${
+              ytdPerformanceValue >= 0 ? "positive" : "negative"
+            }`}
+          >
+            {ytdPerformanceValue >= 0 ? "+" : "-"}$
+            {Math.abs(ytdPerformanceValue).toLocaleString()}
+          </div>
+        </div>
       </div>
-
-      <div className="boxTwo">
-        <Box
-          height={100}
-          width={150}
-          my={4}
-          display="flex"
-          flexDirection="column"
-          justifyContent="center"
-          alignItems="center"
-          gap={1}
-          p={2}
-          sx={{ border: '1px solid black', bgcolor: '#656565', color: 'white',   }}
-        >
-          <div>Premia Sold Today (insert date logic):</div>
-          <div>$349.50</div>
-        </Box>
+      <div className="chart-container">
+        <div>This will be a chart of user account performance</div>
       </div>
-      <div className="boxFour">
-        <Box
-          height={116}
-          width={150}
-          my={4}
-          display="flex"
-          flexDirection="column"
-          justifyContent="center"
-          alignItems="center"
-          gap={1}
-          p={1}
-          sx={{ border: '1px solid black', bgcolor: '#656565', color: 'white',   }}
-        >
-          <div>YTD Performance:</div>
-          <div>22%</div>
-          <div>+$23,450</div>
-        </Box>
-      </div>
-
-      <div className="boxThree">
-        <Box
-          height={100}
-          width={600}
-          my={1}
-          display="flex"
-          justifyContent="center"
-          alignItems="center"
-          p={3}
-          sx={{ border: '2px solid black', bgcolor: '#656565', color: 'white'  }}
-        >
-          <div>This will be a chart of user account performance:</div>
-        </Box>
-      </div>
-    </div>
     </div>
   );
 }

@@ -50,11 +50,11 @@ function NotesPage() {
       alert("Please fill in all fields (note, ticker, entry date) before submitting.")
       return
     }
-    console.log("Adding Note:", { openpos_id: userId, note, ticker, entry_date: entryDate })
+
 
     dispatch({
       type: "ADD_NOTE",
-      payload: { openpos_id: userId, note, ticker, entry_date: entryDate }
+      payload: { note, ticker, entry_date: entryDate, user_id: userId }
     })
     
 
@@ -66,8 +66,7 @@ function NotesPage() {
 
   const handleDelete = (noteId) => {
     console.log("Deleting note with ID:", noteId)
-    dispatch({ type: "DELETE_NOTE_REQUEST", payload: noteId })
-    dispatch({ type: "FETCH_NOTE", payload: { userId } })
+    dispatch({ type: "DELETE_NOTE_REQUEST", payload: noteId, meta: { userId } }) // meta allows for the passing of additional data with the payload we were already sending, AKA noteId
   }
 
   const handleEditSubmit = (event) => {

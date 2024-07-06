@@ -31,7 +31,38 @@ function CurrentPositions() {
     if (userId) {
       dispatch({ type: "FETCH_POSITIONS", payload: { userId } });
     }
+
   }, [userId, dispatch]);
+
+
+  console.log("positionsAndStuff:", positionsAndStuff); // delete eventually, just used for checking data
+
+  const filteredPositions = positionsAndStuff.filter((position) => 
+    position.ticker !== null &&
+    position.strike !== null &&
+    position.initial_underlying_price !== null &&
+    position.contracts !== null &&
+    position.current_otm_percent !== null &&
+    position.initial_otm_percent !== null &&
+    position.initial_premia !== null &&
+    position.entry_date !== null &&
+    position.expiry !== null &&
+    position.dte !== null
+  ) // ^^ this logic above is meant to only add official positions from
+    // the future schwab api calls to our CurrentPositions page,
+    // so basically we can still add notes about tickers
+    // on the notes page, but only account positions
+    // pulled from schwab will show up on the actual positions
+    // page here. This opens the door to hypothesize and take notes
+    // about future positions you plan on entering, or on 
+    // strategies about your entrance, i.e, you could enter
+    // a note that has the ticker AAPL (Apple) and say
+    // "Reminder to sell calls on AAPL post-earnings release"
+    // with the earnings release date entered in the entry date
+    // column. An eventual stretch goal could also be to send alerts
+    // to users based on this information, reminding them to enter
+    // the position they were considering and to check the APP for
+    // details, or at least give the optionality to create alerts
 
   return (
     <ThemeProvider theme={darkTheme}>
@@ -64,7 +95,7 @@ function CurrentPositions() {
             </TableHead>
 
             <TableBody>
-              {positionsAndStuff.map((position) => (
+              {filteredPositions.map((position)  => (
                 <TableRow key={position.id}>
                   <TableCell>{position.ticker}</TableCell>
                   <TableCell>{position.strike}</TableCell>

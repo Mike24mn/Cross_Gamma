@@ -21,9 +21,9 @@ function* fetchNotes(action) {
 function* addNote(action) {
   try {
     console.log("addNote action.payload value is: ", action.payload)
-    yield call(axios.post, "/api/notes", action.payload, config)
-    console.log("Note added successfully")
-    yield put({ type: "FETCH_NOTE", payload: {userId: action.payload.openpos_id}})
+    const { note, ticker, entry_date, user_id } = action.payload // I updated this so it destructures the payload and is a little more clear, extracting the listed values
+    yield call(axios.post, "/api/notes", { note, ticker, entry_date, user_id })
+    yield put({ type: "FETCH_NOTE", payload: { userId: user_id }}) // use userId as the key for a specific user and user_id is the actual users id
   } catch (error) {
     console.log("Error with the note post request", error)
   }
@@ -34,9 +34,10 @@ function* deleteNoteSaga(action) {
       console.log("deleteNoteSaga action.payload value is: ", action.payload)
       yield call(axios.delete, `/api/notes/${action.payload}`)
       console.log("Note deleted successfully")
-      yield put({ type: 'DELETE_NOTE_SUCCESS', payload: action.payload.noteId})
+      yield put({ type: 'DELETE_NOTE_SUCCESS', payload: action.payload.noteId}) // dispatch success with targeted notes id as the payload
+      yield put({ type: 'FETCH_NOTE', payload: { userId: action.meta.userId } }) // fetch new notes after a delete, action.meta is a way to pass additional info beyond the normal payload info
     } catch (error) {
-      yield put({ type: 'DELETE_NOTE_FAILED', payload: error })
+      yield put({ type: 'DELETE_NOTE_FAILED', payload: error }) // added error handling for notes and a condition in the reducer switch for it
     }
   }
 

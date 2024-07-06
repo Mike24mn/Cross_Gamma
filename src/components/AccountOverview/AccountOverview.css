@@ -1,28 +1,55 @@
-table, th, td {
-    border: 1px solid black;
-  }
-  
-  .boxes {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    max-width: 540px;
-    margin: auto;
-    
-  }
-  
-  .boxOne, .boxTwo, .boxFour {
-    width: 100%
-    margin: 40px;
-    
-  }
+.account-overview {
+  padding: 20px;
+  background-color: #000000;
+  border-radius: 8px;
+}
+{/* tried to configure for different screen resolutions, will have to see how the other screens work on different resolutions too eventually */}
+.stats-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  margin-bottom: 20px;
+  text-align: center;
+}
 
-  .boxThree {
-    
-    width: 100%;
-    display: flex;
-    justify-content: center;
-  }
-  
- 
+.stat-box {
+  background-color: #1f1e1e;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 4px 6px rgba(88, 84, 84, 0.1);
+  transition: all 0.3s ease;
+}
+
+.stat-box:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+}
+
+.stat-title {
+  font-size: 14px;
+  color: #f3ebeb;
+  margin-bottom: 8px;
+}
+
+.stat-value {
+  font-size: 24px;
+  font-weight: bold;
+  color: #d2700e;
+}
+
+.positive {
+  color: #4caf50;
+}
+
+.negative {
+  color: #f44336;
+}
+
+.chart-container {
+  background-color: #1f1e1e;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 4px 6px rgba(88, 84, 84, 0.1);
+  height: 200px;
+  text-align: center;
+}
