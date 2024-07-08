@@ -1,43 +1,42 @@
 .welcomeclass {
-    opacity: 0.9;
-    text-align: center;
-    font-size: 3ch;
-    color: rgb(255, 250, 250);
-    background-color: rgb(0, 0, 0);
-    font-family: monospace;
-    font-weight: bolder;
-  }
+  opacity: 0.9;
+  text-align: center;
+  font-size: 3ch;
+  color: rgb(255, 250, 250);
+  background-color: rgb(0, 0, 0);
+  font-family: monospace;
+  font-weight: bolder;
+}
 
-  h2 {
-    
-    color: rgb(255, 255, 255);
-    font-family: monospace;
-    background-position: center;
-    text-align-last: center;
-    text-decoration: underline;
-    font-size: 3ch
-  }
+h2 {
+  color: rgb(255, 255, 255);
+  font-family: monospace;
+  background-position: center;
+  text-align-last: center;
+  text-decoration: underline;
+  font-size: 3ch;
+}
 
-  .formpanel {
-        font-family: monospace;
-    color: aliceblue;
-    font-family: monospace;
-    background-position: center;
-  }
+.formpanel {
+  font-family: monospace;
+  color: aliceblue;
+  font-family: monospace;
+  background-position: center;
+}
 
 body {
-    background-color: rgb(90, 88, 88);
+  background-color: rgb(90, 88, 88);
 }
 .btn {
-    padding: 10px 20px;
-    border: 1px solid #333;
-    border-radius: 4px;
-    background-color: #555; 
-    color: #f8f8f8; 
-    font-size: 1rem;
-    cursor: pointer;
-  }
-  
-  .btn:hover {
-    background-color: #777; 
-  }
+  padding: 10px 20px;
+  border: 1px solid #333;
+  border-radius: 4px;
+  background-color: #555;
+  color: #f8f8f8;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background-color: #777;
+}

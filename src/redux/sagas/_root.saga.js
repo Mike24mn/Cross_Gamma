@@ -1,8 +1,8 @@
 import { all, put, call, takeLatest } from "redux-saga/effects";
-import loginSaga from './login.saga';
-import registrationSaga from './registration.saga';
-import userSaga from './user.saga';
-import fetchNotes from './notes.saga';
+import loginSaga from "./login.saga";
+import registrationSaga from "./registration.saga";
+import userSaga from "./user.saga";
+import fetchNotes from "./notes.saga";
 import notesSaga from "./notes.saga";
 import positionsSaga from "./positions.saga";
 import chartSaga from "./yahoo.saga";
@@ -21,6 +21,6 @@ export default function* rootSaga() {
     userSaga(),
     notesSaga(),
     positionsSaga(),
-    chartSaga()
+    chartSaga(),
   ]);
 }

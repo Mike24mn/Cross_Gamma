@@ -1,9 +1,5 @@
 import React from "react";
 import "./AboutPage.css";
-// This is one of our simplest components
-// It doesn't have local state,
-// It doesn't dispatch any redux actions or display any part of redux state
-// or even care what the redux state is'
 
 function AboutPage() {
   return (
@@ -43,7 +39,7 @@ function AboutPage() {
 
       <div className="section">
         <h1 className="section-title">Future Release Features:</h1>
-        <ul>
+        <ul className="future-features-list">
           <li>Time until-market-close will be located next to the clock</li>
           <li>
             A user alert system for notes, or the ability to be alerted on
@@ -97,7 +93,7 @@ function AboutPage() {
 
       <div className="section disclaimer">
         <p>Disclaimer:</p>
-        <h5>The Qinematic Quant is not a real company!</h5>
+        <p className="disclaimer">The Qinematic Quant is not a real company!</p>
       </div>
     </div>
   );

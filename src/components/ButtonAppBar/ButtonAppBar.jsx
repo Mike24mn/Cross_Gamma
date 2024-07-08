@@ -1,30 +1,27 @@
-import React, { useState } from 'react';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
-import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
-import { Link } from 'react-router-dom';
-import LogOutButton from '../LogOutButton/LogOutButton'; 
-import { styled } from '@mui/material/styles';  
+import React, { useState } from "react";
+import AppBar from "@mui/material/AppBar";
+import Box from "@mui/material/Box";
+import Toolbar from "@mui/material/Toolbar";
+import Typography from "@mui/material/Typography";
+import Button from "@mui/material/Button";
+import IconButton from "@mui/material/IconButton";
+import MenuIcon from "@mui/icons-material/Menu";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
+import { Link } from "react-router-dom";
+import LogOutButton from "../LogOutButton/LogOutButton";
+import { styled } from "@mui/material/styles";
 
 const StyledLink = styled(Link)({
-  color: '#FFFFFF',
-  textDecoration: 'none',
-  width: '100%',
-  display: 'block',
-    fontWeight: 'bold',
-    textDecoration: 'underline',
-})
+  color: "#FFFFFF",
+  textDecoration: "none",
+  width: "100%",
+  display: "block",
+  fontWeight: "bold",
+  textDecoration: "underline",
+});
 
 export default function ButtonAppBar({ user }) {
-
-
-
   const [anchorEl, setAnchorEl] = useState(null); // anchor point for our menu
 
   const handleMenuOpen = (event) => {
@@ -36,45 +33,44 @@ export default function ButtonAppBar({ user }) {
   };
 
   return (
-    <Box sx={{ flexGrow: 1, width: '100%', backgroundColor: '#000' }}>
-      <AppBar position="static" sx={{ width: '100%', backgroundColor: '#000' }}>
+    <Box sx={{ flexGrow: 1, width: "100%", backgroundColor: "#000" }}>
+      <AppBar position="static" sx={{ width: "100%", backgroundColor: "#000" }}>
         <Toolbar>
           <IconButton
             size="large"
             edge="start"
             color="inherit"
             aria-label="menu"
-            sx={{ mr: 2, backgroundColor: "#507D80" }} 
+            sx={{ mr: 2, backgroundColor: "#507D80" }}
             onClick={handleMenuOpen}
           >
             <MenuIcon />
           </IconButton>
-          <Menu 
+          <Menu
             anchorEl={anchorEl}
             open={Boolean(anchorEl)}
             onClose={handleMenuClose}
             sx={{
-              '& .MuiPaper-root': {
-                backgroundColor: '#777',
+              "& .MuiPaper-root": {
+                backgroundColor: "#777",
               },
-              
-    '& .MuiMenuItem-root': {
-      color: '#00CED1', 
-      '&:hover': {
-        backgroundColor: '#507D80', 
-      },
-    },
+
+              "& .MuiMenuItem-root": {
+                color: "#00CED1",
+                "&:hover": {
+                  backgroundColor: "#507D80",
+                },
+              },
             }}
           >
-             {/* if no user id, route to login */}
+            {/* if no user id, route to login */}
             {!user.id ? (
-              <MenuItem  onClick={handleMenuClose} >
+              <MenuItem onClick={handleMenuClose}>
                 <StyledLink to="/login">Login</StyledLink>
               </MenuItem>
             ) : (
-              
               <>
-              {/* if user id, allow routes to acc overview, curr pos, and notes, also render that logout button! */}
+                {/* if user id, allow routes to acc overview, curr pos, and notes, also render that logout button! */}
                 <MenuItem onClick={handleMenuClose}>
                   <StyledLink to="/overview">Account Overview</StyledLink>
                 </MenuItem>
@@ -86,8 +82,8 @@ export default function ButtonAppBar({ user }) {
                 </MenuItem>
               </>
             )}
-             {/* if no user id allow route to about as well */}
-             <MenuItem onClick={handleMenuClose}>
+            {/* if no user id allow route to about as well */}
+            <MenuItem onClick={handleMenuClose}>
               <StyledLink to="/about">About</StyledLink>
             </MenuItem>
           </Menu>
@@ -95,12 +91,14 @@ export default function ButtonAppBar({ user }) {
             Menu
           </Typography>
           {user.id ? (
-          <Button color="inherit">
-                    <LogOutButton />
-          </Button>
-          ) : (<span></span>)} 
-         {/* span above is for rendering nothing if user not logged in */}
-        </Toolbar >
+            <Button color="inherit">
+              <LogOutButton />
+            </Button>
+          ) : (
+            <span></span>
+          )}
+          {/* span above is for rendering nothing if user not logged in */}
+        </Toolbar>
       </AppBar>
     </Box>
   );

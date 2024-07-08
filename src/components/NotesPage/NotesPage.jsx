@@ -10,8 +10,7 @@ import Paper from "@mui/material/Paper";
 import Button from "@mui/material/Button";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { grey } from "@mui/material/colors";
-import "./NotesPage.css"
-
+import "./NotesPage.css";
 
 // theme can be used w/ mui themeProvider wrapping
 // REMINDER: Use below wrapper for reference if needed
@@ -24,97 +23,104 @@ const darkTheme = createTheme({
       main: "#64a9ad", // Turquois color
     },
     background: {
-      default: "#424242", // background color 
-      paper: "#616161", //  paper color 
+      default: "#424242", // background color
+      paper: "#616161", //  paper color
     },
   },
-})
+});
 
 function NotesPage() {
-  const noteItems = useSelector((store) => store.notesReducer)
-  const [entryDate, setEntryDate] = useState("")
-  const [editedNote, setEditedNote] = useState("")
-  const [editNoteId, setEditNoteId] = useState(null)
-  const userId = useSelector((state) => state.user.id)
-  const dispatch = useDispatch()
+  const noteItems = useSelector((store) => store.notesReducer);
+  const [entryDate, setEntryDate] = useState("");
+  const [editedNote, setEditedNote] = useState("");
+  const [editNoteId, setEditNoteId] = useState(null);
+  const userId = useSelector((state) => state.user.id);
+  const dispatch = useDispatch();
 
-  const [note, setNote] = useState("")
-  const [ticker, setTicker] = useState("")
+  const [note, setNote] = useState("");
+  const [ticker, setTicker] = useState("");
 
   useEffect(() => {
     if (userId) {
-      dispatch({ type: "FETCH_NOTE", payload: { userId } })
+      dispatch({ type: "FETCH_NOTE", payload: { userId } });
     }
-  }, [userId, dispatch]) // gets notes for that specific user
+  }, [userId, dispatch]); // gets notes for that specific user
 
   const handleSubmit = (event) => {
-    event.preventDefault()
+    event.preventDefault();
 
     // check if all fields are filled
     if (!note || !ticker || !entryDate) {
-      alert("Please fill in all fields (note, ticker, entry date) before submitting.")
-      return
+      alert(
+        "Please fill in all fields (note, ticker, entry date) before submitting."
+      );
+      return;
     }
-
 
     dispatch({
       type: "ADD_NOTE",
-      payload: { note, ticker, entry_date: entryDate, user_id: userId }
-    })
-    
+      payload: { note, ticker, entry_date: entryDate, user_id: userId },
+    });
 
     // clear the inputs
-    setNote("")
-    setTicker("")
-    setEntryDate("")
+    setNote("");
+    setTicker("");
+    setEntryDate("");
   };
 
   const handleDelete = (noteId) => {
-    console.log("Deleting note with ID:", noteId)
-    dispatch({ type: "DELETE_NOTE_REQUEST", payload: noteId, meta: { userId } }) // meta allows for the passing of additional data with the payload we were already sending, AKA noteId
-  }
+    console.log("Deleting note with ID:", noteId);
+    dispatch({
+      type: "DELETE_NOTE_REQUEST",
+      payload: noteId,
+      meta: { userId },
+    }); // meta allows for the passing of additional data with the payload we were already sending, AKA noteId
+  };
 
   const handleEditSubmit = (event) => {
-    event.preventDefault()
-    dispatch({ type: "EDIT_NOTE", payload: { note_id: editNoteId, note: editedNote, userId: userId} })
-    setEditNoteId(null)
-    setEditedNote("")
-    dispatch({ type: "FETCH_NOTE", payload: { userId } })
-  }
+    event.preventDefault();
+    dispatch({
+      type: "EDIT_NOTE",
+      payload: { note_id: editNoteId, note: editedNote, userId: userId },
+    });
+    setEditNoteId(null);
+    setEditedNote("");
+    dispatch({ type: "FETCH_NOTE", payload: { userId } });
+  };
 
   const handleEdit = (noteId, noteContents) => {
-    setEditNoteId(noteId)
-    setEditedNote(noteContents)
-  }
+    setEditNoteId(noteId);
+    setEditedNote(noteContents);
+  };
 
   return (
     <ThemeProvider theme={darkTheme}>
       <div className="container">
-        <h2 style={{ color: "white",  }}>Notes:</h2>
-  <center>
-        <form onSubmit={handleSubmit}>
-          <input
-            type="text"
-            placeholder="Ticker"
-            value={ticker}
-            onChange={(event) => setTicker(event.target.value)}
-          />
-          <input
-            type="text"
-            placeholder="Add Note"
-            value={note}
-            onChange={(event) => setNote(event.target.value)}
-          />
-          <input
-            type="text"
-            placeholder="Entry Date"
-            value={entryDate}
-            onChange={(event) => setEntryDate(event.target.value)}
-          />
-          <Button type="submit" variant="contained" color="primary">
-            Submit
-          </Button>
-        </form>
+        <h2 style={{ color: "white" }}>Notes:</h2>
+        <center>
+          <form onSubmit={handleSubmit}>
+            <input
+              type="text"
+              placeholder="Ticker"
+              value={ticker}
+              onChange={(event) => setTicker(event.target.value)}
+            />
+            <input
+              type="text"
+              placeholder="Add Note"
+              value={note}
+              onChange={(event) => setNote(event.target.value)}
+            />
+            <input
+              type="text"
+              placeholder="Entry Date"
+              value={entryDate}
+              onChange={(event) => setEntryDate(event.target.value)}
+            />
+            <Button type="submit" variant="contained" color="primary">
+              Submit
+            </Button>
+          </form>
         </center>
         <p></p>
 
@@ -150,7 +156,10 @@ function NotesPage() {
                       variant="contained"
                       color="error"
                       disabled={editNoteId === item.note_id}
-                      sx={{ bgcolor: grey[800], "&:hover": { bgcolor: grey[900] } }} // Dark grey for Delete button
+                      sx={{
+                        bgcolor: grey[800],
+                        "&:hover": { bgcolor: grey[900] },
+                      }} // Dark grey for Delete button
                     >
                       Delete
                     </Button>
@@ -159,12 +168,22 @@ function NotesPage() {
                         <input
                           type="text"
                           value={editedNote}
-                          onChange={(event) => setEditedNote(event.target.value)}
+                          onChange={(event) =>
+                            setEditedNote(event.target.value)
+                          }
                         />
-                        <Button type="submit" variant="contained" color="primary">
+                        <Button
+                          type="submit"
+                          variant="contained"
+                          color="primary"
+                        >
                           Save
                         </Button>
-                        <Button onClick={() => setEditNoteId(null)} variant="contained" sx={{ bgcolor: grey[800] }}>
+                        <Button
+                          onClick={() => setEditNoteId(null)}
+                          variant="contained"
+                          sx={{ bgcolor: grey[800] }}
+                        >
                           Cancel
                         </Button>
                       </form>

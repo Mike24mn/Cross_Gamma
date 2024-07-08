@@ -20,32 +20,27 @@ const style = {
 
 export default function BasicModal() {
   const [open, setOpen] = useState(false);
-  
 
   const userId = useSelector((state) => state.user.id);
   const noteItems = useSelector((store) => store.notesReducer);
   const [note, setNote] = useState("");
-  const [ticker, setTicker] = useState("")
-  const [entryDate, setEntryDate] = useState("")
+  const [ticker, setTicker] = useState("");
+  const [entryDate, setEntryDate] = useState("");
 
- 
-
-  
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const pickCell = (event) => {
-    const parentCol = event.target.closest('tr')
+    const parentCol = event.target.closest("tr");
     if (parentCol) {
-        const individualCells = parentCol.cells
-        const tickerTarget = individualCells[0].textContent // this is the first column of our table
-        const entryDateTarget = individualCells[7].textContent // this is the 8th column of our table (index 7)
-        setTicker(tickerTarget)
-        setEntryDate(entryDateTarget)
+      const individualCells = parentCol.cells;
+      const tickerTarget = individualCells[0].textContent; // this is the first column of our table
+      const entryDateTarget = individualCells[7].textContent; // this is the 8th column of our table (index 7)
+      setTicker(tickerTarget);
+      setEntryDate(entryDateTarget);
+    } else {
+      console.log("NO cell found");
     }
-    else {
-        console.log("NO cell found");
-    }
-  }
+  };
 
   // this handleOpen will make it so when we go to open the modal, pickCell function gets
   // called and selects ticker and entry date, since issues were being encountered
@@ -53,12 +48,11 @@ export default function BasicModal() {
   // also set the modal boolean setOpen to true on click
 
   const handleOpen = (event) => {
-    pickCell(event)
-    setOpen(true)
-  }
+    pickCell(event);
+    setOpen(true);
+  };
 
   const handleClose = () => setOpen(false);
-
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -71,9 +65,9 @@ export default function BasicModal() {
 
     dispatch({
       type: "ADD_NOTE",
-      payload: {  note, ticker, entry_date: entryDate, user_id: userId, },
+      payload: { note, ticker, entry_date: entryDate, user_id: userId },
     });
-    setNote("")
+    setNote("");
     handleClose(); // close window
   };
 
@@ -90,7 +84,10 @@ export default function BasicModal() {
       >
         <Box sx={style}>
           <Typography id="modal-modal-title" variant="h6" component="h2">
-         <center> Add new note to the selected position <b>${ticker}</b>:</center>
+            <center>
+              {" "}
+              Add new note to the selected position <b>${ticker}</b>:
+            </center>
           </Typography>
           <center>
             <Typography id="modal-modal-description" sx={{ mt: 2 }}>

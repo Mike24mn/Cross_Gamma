@@ -5,7 +5,7 @@
   align-items: center;
   font-family: monospace;
   margin: 0 0 30px;
-  background-color:rgb(29, 28, 28);
+  background-color: rgb(29, 28, 28);
   overflow: hidden;
 }
 
@@ -43,7 +43,6 @@
   background-color: grey;
 }
 
-
 body {
   background-color: rgb(0, 0, 0);
 }
@@ -61,7 +60,6 @@ header {
   background-position: center;
   background-repeat: repeat-y;
   background-size: contain;
-
 }
 
 .divhead {
@@ -74,9 +72,8 @@ header {
 }
 
 .imagebody {
-      font-family: monospace;
+  font-family: monospace;
   display: inline-block;
   width: 100px;
   height: 100px;
-
 }

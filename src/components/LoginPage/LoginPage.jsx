@@ -1,7 +1,7 @@
-import React from 'react';
-import LoginForm from '../LoginForm/LoginForm';
-import { useHistory } from 'react-router-dom';
-import "./LoginPage.css"
+import React from "react";
+import LoginForm from "../LoginForm/LoginForm";
+import { useHistory } from "react-router-dom";
+import "./LoginPage.css";
 
 function LoginPage() {
   const history = useHistory();
@@ -15,7 +15,7 @@ function LoginPage() {
           type="button"
           className="btn_asLink"
           onClick={() => {
-            history.push('/registration');
+            history.push("/registration");
           }}
         >
           Register

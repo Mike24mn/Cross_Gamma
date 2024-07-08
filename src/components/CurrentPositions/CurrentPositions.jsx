@@ -15,7 +15,7 @@ import {
 } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { grey } from "@mui/material/colors";
-import "./CurrentPositions.css"
+import "./CurrentPositions.css";
 import BasicModal from "../ModalComponent/ModalComponent.jsx"; // import modal
 
 const darkTheme = createTheme({
@@ -44,28 +44,30 @@ function CurrentPositions() {
 
   console.log("positionsAndStuff:", positionsAndStuff); // delete eventually, just used for checking data
 
-  const filteredPositions = positionsAndStuff.filter(
-    (position) =>
-      position.ticker !== null &&
-      position.strike !== null &&
-      position.initial_underlying_price !== null &&
-      position.contracts !== null &&
-      position.current_otm_percent !== null &&
-      position.initial_otm_percent !== null &&
-      position.initial_premia !== null &&
-      position.entry_date !== null &&
-      position.expiry !== null &&
-      position.dte !== null
-  ).map(position => ({
-    ...position,
-    current_otm_percent: Math.random() * 30, // rand int between 0 and 30%
-    initial_otm_percent: Math.random() * 80 + 20, // rand int between 20 and 100%
-    dte: Math.random() * 365 // rand int between 0 and 365
-     })) // this bottom part maps the positions array above it and uses 
-     // the spread operator to add some hard coded data 
-     // to use for the app demo, since Schwab Oauth
-     // is still in the works unfortunately
-     
+  const filteredPositions = positionsAndStuff
+    .filter(
+      (position) =>
+        position.ticker !== null &&
+        position.strike !== null &&
+        position.initial_underlying_price !== null &&
+        position.contracts !== null &&
+        position.current_otm_percent !== null &&
+        position.initial_otm_percent !== null &&
+        position.initial_premia !== null &&
+        position.entry_date !== null &&
+        position.expiry !== null &&
+        position.dte !== null
+    )
+    .map((position) => ({
+      ...position,
+      current_otm_percent: Math.random() * 30, // rand int between 0 and 30%
+      initial_otm_percent: Math.random() * 80 + 20, // rand int between 20 and 100%
+      dte: Math.random() * 365, // rand int between 0 and 365
+    })); // this bottom part maps the positions array above it and uses
+  // the spread operator to add some hard coded data
+  // to use for the app demo, since Schwab Oauth
+  // is still in the works unfortunately
+
   // ^^ this logic above is meant to only add official positions from
   // the future schwab api calls to our CurrentPositions page,
   // so basically we can still add notes about tickers
@@ -127,8 +129,12 @@ function CurrentPositions() {
                   >
                     {position.current_otm_percent.toFixed(1)}%
                   </TableCell>
-                  <TableCell>{position.initial_otm_percent.toFixed(1)}%</TableCell>
-                  <TableCell>${Math.abs(position.initial_premia).toLocaleString()}</TableCell>
+                  <TableCell>
+                    {position.initial_otm_percent.toFixed(1)}%
+                  </TableCell>
+                  <TableCell>
+                    ${Math.abs(position.initial_premia).toLocaleString()}
+                  </TableCell>
                   <TableCell>{position.entry_date.substring(0, 10)}</TableCell>
                   <TableCell>{position.expiry.substring(0, 10)}</TableCell>
                   <TableCell>{position.dte.toFixed()}</TableCell>

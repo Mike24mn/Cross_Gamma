@@ -3,7 +3,9 @@
   background-color: #000000;
   border-radius: 8px;
 }
-{/* tried to configure for different screen resolutions, will have to see how the other screens work on different resolutions too eventually */}
+ {
+  /* tried to configure for different screen resolutions, will have to see how the other screens work on different resolutions too eventually */
+}
 .stats-container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
