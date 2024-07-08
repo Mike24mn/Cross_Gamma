@@ -28,7 +28,7 @@ function Footer() {
   return (
     <footer>
       <div className='timedivvy'>Current Time: {currentTime}</div>
-      &copy; Cross-Gamma, 2024 | Evergreen Investments
+      &copy; Cross-Gamma, 2024 | The Qinematic Quant
     </footer>
   );
 }

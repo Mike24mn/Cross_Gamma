@@ -12,6 +12,11 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { grey } from "@mui/material/colors";
 import "./NotesPage.css"
 
+
+// theme can be used w/ mui themeProvider wrapping
+// REMINDER: Use below wrapper for reference if needed
+// (in the return statement HTML)
+
 const darkTheme = createTheme({
   palette: {
     mode: "dark",
