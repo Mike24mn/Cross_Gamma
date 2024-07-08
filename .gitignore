@@ -67,4 +67,4 @@ typings/
 # ignore package-lock as it complicates merging
 package-lock.json
 
-ssl/
+ssl
