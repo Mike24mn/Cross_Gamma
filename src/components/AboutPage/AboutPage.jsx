@@ -32,9 +32,11 @@ function AboutPage() {
           form of a drop-down menu on the login page and routes designed to
           accommodate each broker's authentication process respectively.
         </p>
-        <div className="video-placeholder">
-          <p>* Add example video here *</p>
-        </div>
+        <div className="section">
+        <h1 className="section-titleexample">Example:</h1>
+        <img src="/images/image copy 2.png" alt="Example" className="example-imageone" />
+        <img src="/images/image copy.png" alt="Example" className="example-imagetwo" />
+      </div>
       </div>
 
       <div className="section">

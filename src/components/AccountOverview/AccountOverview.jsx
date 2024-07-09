@@ -87,7 +87,7 @@ function AccountOverview({ user }) {
         ticks: {
           // set spacing ticks
           callback: function (value) {
-            return "$" + value.toLocaleString();
+            return "$" + value.toLocaleString(); // concat w/ $ symbol
           },
         },
       },
