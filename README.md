@@ -15,7 +15,7 @@ Analysis tools for options trading
 
 1. **Dashboard**: Get a quick overview of your overall account status...
    
-   <img width="1463" alt="6DA7B8E9-CE72-4C46-A253-BE798F208E4F" src="https://github.com/user-attachments/assets/56499c84-3c58-4f9b-bd1e-0b6d68ab9159">
+<img width="1463" alt="6DA7B8E9-CE72-4C46-A253-BE798F208E4F" src="https://github.com/user-attachments/assets/56499c84-3c58-4f9b-bd1e-0b6d68ab9159">
 
 2. **Login Screen w/ OAuth button**: Create and register new users and authenticate via Schwab...
    
