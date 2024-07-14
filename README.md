@@ -13,19 +13,19 @@ State management with Redux
 Real-time data updates
 Analysis tools for options trading
 
-1. **Dashboard**: Get a quick overview of your overall account status.
+1. **Dashboard**: Get a quick overview of your overall account status...
    
    ![Dashboard](public/images/CGamma.png)
 
-2. **Login Screen w/ OAuth button**: Create and register new users and authenticate via Schwab.
+2. **Login Screen w/ OAuth button**: Create and register new users and authenticate via Schwab...
 
    ![Login/Register User](public/images/CGammaTwo.png)
 
-3. **Position Management**: View and manage all your trading positions in one place.
+3. **Position Management**: View and manage all your trading positions in one place...
 
    ![Position Management](public/images/CGammaFour.png)
 
-4. **Take notes on open positions and future positions you intend on entering (set reminders/alerts to enter)**: Create comprehensive notes on each positon you have open and notes about positions you wish to enter as well.
+4. **Take notes on open positions and future positions you intend on entering (set reminders/alerts to enter)**: Create comprehensive notes on each positon you have open and notes about positions you wish to enter as well...
 
    ![Comprehensive Notes Page](public/images/CGammaThree.png)
 
