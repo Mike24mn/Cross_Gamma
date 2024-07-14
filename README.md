@@ -15,20 +15,19 @@ Analysis tools for options trading
 
 1. **Dashboard**: Get a quick overview of your overall account status...
    
-   ![Dashboard](public/images/CGamma.png)
+   <img width="1463" alt="6DA7B8E9-CE72-4C46-A253-BE798F208E4F" src="https://github.com/user-attachments/assets/56499c84-3c58-4f9b-bd1e-0b6d68ab9159">
 
 2. **Login Screen w/ OAuth button**: Create and register new users and authenticate via Schwab...
-
-   ![Login/Register User](public/images/CGammaTwo.png)
+   
+<img width="1454" alt="3BA2DD6E-2E9D-4212-8659-D58CADAB0B2F" src="https://github.com/user-attachments/assets/46b45f44-20a5-4b26-ba2a-49ef271915a8">
 
 3. **Position Management**: View and manage all your trading positions in one place...
 
-   ![Position Management](public/images/CGammaFour.png)
+<img width="1451" alt="E4F95164-6BC6-45BF-9148-813A7F9009B5" src="https://github.com/user-attachments/assets/5f74a743-4305-4c50-b6ac-41ab7da3c7e5">
 
 4. **Take notes on open positions and future positions you intend on entering (set reminders/alerts to enter)**: Create comprehensive notes on each positon you have open and notes about positions you wish to enter as well...
 
-   ![Comprehensive Notes Page](public/images/CGammaThree.png)
-
+<img width="1454" alt="2EB6D4A2-6D98-4689-A882-79C9B56D8589" src="https://github.com/user-attachments/assets/f8bf27b3-14fb-4d12-b824-ebcc5b93fbb7">
 
 Installation
 Prerequisites:
