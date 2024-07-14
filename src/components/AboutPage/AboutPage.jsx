@@ -97,6 +97,7 @@ function AboutPage() {
         <p>Disclaimer:</p>
         <p className="disclaimer">The Qinematic Quant is not a real company!</p>
       </div>
+      <p></p>
     </div>
   );
 }
