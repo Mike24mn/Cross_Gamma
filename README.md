@@ -1,4 +1,4 @@
-<b>CrossGamma</b>
+<center><b>CrossGamma</b></center>
 
 Overview:
 
