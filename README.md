@@ -1,6 +1,6 @@
-<center><b>CrossGamma</b></center>
+<b>CrossGamma</b>
 
-Overview:
+<center>Overview:</center>
 
 CrossGamma is a full-stack web application designed for options trading analysis. Built with React, Redux, Express, and PostgreSQL, it allows users to manage and analyze trading data efficiently. This application aims to provide traders with insights and tools to make informed decisions.
 
